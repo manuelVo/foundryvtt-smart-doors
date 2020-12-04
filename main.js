@@ -22,13 +22,17 @@ Hooks.on("renderChatMessage", (message, html, data) => {
 
 	// Tint on mouse enter
 	const mouseEnter = function () {
-		canvas.controls.doors.children.find(door => door.wall.data._id == sourceId).icon.tint = 0xff0000;
+		const sourceDoor = canvas.controls.doors.children.find(door => door.wall.data._id == sourceId);
+		if (sourceDoor)
+			sourceDoor.icon.tint = 0xff0000;
 	}
 	html.on("mouseenter", mouseEnter);
 
 	// Remove tint on mouse leave
 	const mouseLeave = function () {
-		canvas.controls.doors.children.find(door => door.wall.data._id == sourceId).icon.tint = 0xffffff;
+		const sourceDoor = canvas.controls.doors.children.find(door => door.wall.data._id == sourceId);
+		if (sourceDoor)
+			sourceDoor.icon.tint = 0xffffff;
 	}
 	html.on("mouseleave", mouseLeave);
 })
