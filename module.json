@@ -1,10 +1,10 @@
 {
 	"name": "smart-doors",
 	"title": "Smart Doors",
-	"description": "Sends a message to chat when a player tries to open a locked door",
-	"version": "0.1.alpha0",
+	"description": "Makes doors smarter. Allows doors to synchronize across multiple scenes and sends chat messages when players try to open locked doors.",
+	"version": "0.1.alpha1",
 	"minimumCoreVersion" : "0.7.7",
-	"compatibleCoreVersion" : "0.7.7",
+	"compatibleCoreVersion" : "0.7.8",
 	"author": "Manuel Vögele",
 	"esmodules": [
 		"./main.js"
