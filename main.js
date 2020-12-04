@@ -1,11 +1,16 @@
 "use strict";
 
 const settingsKey = "smart-doors";
+const currentDataVersion = "1.0.0"
 
 Hooks.once("init", () => {
 	registerSettings()
 	hookDoorEvents()
 	hookWallConfigUpdate()
+})
+
+Hooks.once("ready", () => {
+	performMigrations()
 })
 
 // Tint the source door red when a locked alert is hovered
@@ -236,8 +241,24 @@ function synchronizedDoorsRightClick() {
 	return true
 }
 
+function performMigrations() {
+	const dataVersion = game.settings.get(settingsKey, "dataVersion")
+	if (dataVersion === "fresh install")
+	{
+		game.settings.set(settingsKey, "dataVersion", currentDataVersion);
+		return;
+	}
+	if (dataVersion != currentDataVersion)
+		ui.notifications.error(game.i18n.localize("smart-doors.ui.messages.unknownVersion"), {permanent: true})
+}
 
 function registerSettings() {
+	game.settings.register(settingsKey, "dataVersion", {
+		scope: "world",
+		config: false,
+		type: String,
+		default: "fresh install"
+	})
 	game.settings.register(settingsKey, "lockedDoorAlert", {
 		name: "smart-doors.settings.lockedDoorAlert.name",
 		hint: "smart-doors.settings.lockedDoorAlert.hint",
