@@ -1,0 +1,10 @@
+{
+    "smart-doors": {
+		"settings": {
+			"lockedDoorAlert": {
+				"name": "Locked Door Alert",
+				"hint": "Send a message in chat when a player tried to open a locked door"
+			}
+		}
+	}
+}

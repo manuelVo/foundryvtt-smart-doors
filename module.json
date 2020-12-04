@@ -1,0 +1,19 @@
+{
+	"name": "smart-doors",
+	"title": "Smart Doors",
+	"description": "Sends a message to chat when a player tries to open a locked door",
+	"version": "0.1.alpha0",
+	"minimumCoreVersion" : "0.7.7",
+	"compatibleCoreVersion" : "0.7.7",
+	"author": "Manuel Vögele",
+	"esmodules": [
+		"./main.js"
+	],
+	"languages": [
+		{
+			"lang": "en",
+			"name": "English",
+			"path": "lang/en.json"
+		}
+	]
+}
