@@ -73,22 +73,25 @@ function hookWallConfigUpdate() {
 
 // Store our custom data from the WallConfig dialog
 async function onWallConfigUpdate(event, formData) {
-	// TODO Bring newly merged doors in sync
 	const updateData = {flags: {smartdoors: {synchronizationGroup: formData.synchronizationGroup}}}
+	let ids = this.options.editTargets;
+	if (ids.length == 0) {
+		ids = [this.object.data._id];
+	}
 
-	const ids = this.options.editTargets;
-	if (ids.length > 0) {
-		// Multiple walls are edited at once. Update all of them
-		const updateDataset = ids.reduce((dataset, id) => {
-			dataset.push({_id: id, ...updateData})
-			return dataset
-		}, [])
-		return canvas.scene.updateEmbeddedEntity("Wall", updateDataset)
+	// If a synchronization group is set, get the state of existing doors and assume their state
+	if (formData.synchronizationGroup) {
+		const doorInGroup = findInAllWalls(wall => wall.door && wall.flags.smartdoors?.synchronizationGroup == formData.synchronizationGroup && !ids.includes(wall._id));
+		if (doorInGroup)
+			updateData.ds = doorInGroup.ds;
 	}
-	else {
-		// Only one wall is being edited
-		return this.object.update(updateData);
-	}
+
+	// Update all the edited walls
+	const updateDataset = ids.reduce((dataset, id) => {
+		dataset.push({_id: id, ...updateData})
+		return dataset
+	}, [])
+	return canvas.scene.updateEmbeddedEntity("Wall", updateDataset)
 }
 
 // Hook mouse events on DoorControls to perform our logic.
@@ -117,7 +120,18 @@ function hookDoorEvents() {
 
 // Searches through all scenes for walls and returns those that match the given filter criteria.
 function filterAllWalls(filterFn) {
-	return game.scenes.map((scene) => {return {scene: scene, walls: scene.data.walls.filter(filterFn)}});
+	// Find all walls that match the filter criteria
+	const scenes = game.scenes.map((scene) => {return {scene: scene, walls: scene.data.walls.filter(filterFn)}})
+	// Drop all scenes that don't contain any results
+	return scenes.filter(scene => scene.walls.length > 0)
+}
+
+// Searches through all scenes for a wall that matches the given filter criteria
+function findInAllWalls(filterFn) {
+	// TODO The performance of this could be increased by stopping the search on the first hit
+	const scenes = filterAllWalls(filterFn)
+	// If results were found take the first wall from the first scene.
+	return scenes[0]?.walls[0]
 }
 
 // Our custom handler for mousedown events on doors
