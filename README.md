@@ -25,3 +25,6 @@ Once a Synchronization Group is set up for multiple doors, simply open/close/loc
 ## Planned features
 - Attach macros to doors that are being executed when the door is being opened/closed
 - Give out keys to players, that allow them to lock/unlock associated doors
+- Doors that can only be seen from one side when closed
+- Only allow doors to be opened of the character is near
+	- Doors that can only be opened from one side
