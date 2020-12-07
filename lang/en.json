@@ -12,6 +12,10 @@
 			"synchronizedDoors": {
 				"name": "Synchronized Doors",
 				"hint": "Synchronize the state of configured doors"
+			},
+			"toggleSecretDoors": {
+				"name": "Toggle Secret Doors",
+				"hint": "Toggle the door type between normal and secret using ctrl+left click"
 			}
 		},
 		"ui": {

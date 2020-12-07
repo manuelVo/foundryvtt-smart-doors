@@ -168,6 +168,9 @@ function onDoorMouseDown(event) {
 	if ( game.paused && !game.user.isGM )
 		return false
 
+	if (toggleSecretDoorLeftClick.call(this, event))
+		return true
+
 	if (lockedDoorAlertLeftClick.call(this))
 		return true
 
@@ -179,9 +182,21 @@ function onDoorMouseDown(event) {
 
 // Our custom handler for rightdown events on doors
 function onDoorRightDown(event) {
+
 	if (synchronizedDoorsRightClick.call(this))
 		return true
 
+	return false
+}
+
+// Toggles between normal and secret doors
+function toggleSecretDoorLeftClick(event) {
+	if (event.data.originalEvent.ctrlKey && game.user.isGM && game.settings.get(settingsKey, "toggleSecretDoors")) {
+		const types = CONST.WALL_DOOR_TYPES
+		const newtype = this.wall.data.door === types.DOOR ? types.SECRET : types.DOOR
+		this.wall.update({door: newtype})
+		return true
+	}
 	return false
 }
 
@@ -317,6 +332,14 @@ function registerSettings() {
 		type: Boolean,
 		default: true,
 		onChange: reloadGM,
+	})
+	game.settings.register(settingsKey, "toggleSecretDoors", {
+		name: "smart-doors.settings.toggleSecretDoors.name",
+		hint: "smart-doors.settings.toggleSecretDoors.hint",
+		scope: "world",
+		config: true,
+		type: Boolean,
+		default: true,
 	})
 	game.settings.register(settingsKey, "lockedDoorAlert", {
 		name: "smart-doors.settings.lockedDoorAlert.name",

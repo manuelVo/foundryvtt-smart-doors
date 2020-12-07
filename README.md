@@ -9,6 +9,12 @@ Makes doors smarter. Allows doors to synchronize across multiple scenes and send
 Which where the secret doors again? This tints all secret doors grey in the GM view, allowing to easily differentiate between normal and secret doors.
 
 
+### Toggle Secret Doors
+![Toggle Secret Doors demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/da5872042ea81e2f41875a193d161331a81a2b6d/media/secret_door_toggle.webp)
+
+Easily reveal secret doors to players. Strg+left click secrets doors to turn them into regular doors. Strg+left click can also be done on normal doors to turn them into secret doors. Using this in combination with Tint Secret Doors is recommended so you can actually see what you are doing.
+
+
 ### Locked Door Alerts
 ![Locked Door Alerts demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/360d724240634dbc6cc493a3b62243a8b28b7056/media/locked_door_alert.webp)
 
