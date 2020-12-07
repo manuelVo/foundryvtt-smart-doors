@@ -50,6 +50,8 @@ Hooks.on("canvasReady", () => {
 
 // If door type has been changed, tint the door accordingly
 Hooks.on("updateWall", (scene, wall, update) => {
+	if (!game.settings.get(settingsKey, "highlightSecretDoors"))
+		return
 	const types = CONST.WALL_DOOR_TYPES
 	if (wall.door === types.NONE)
 		return
