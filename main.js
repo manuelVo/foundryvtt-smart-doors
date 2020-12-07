@@ -37,6 +37,31 @@ Hooks.on("renderChatMessage", (message, html, data) => {
 	html.on("mouseleave", mouseLeave);
 })
 
+const SECRET_DOOR_TINT = 0x222222
+
+// Tint all secret doors dark grey
+Hooks.on("canvasReady", () => {
+	if (game.settings.get(settingsKey, "highlightSecretDoors")) {
+		const types = CONST.WALL_DOOR_TYPES
+		const secretDoors = canvas.controls.doors.children.filter(control => control.wall.data.door == types.SECRET)
+		secretDoors.forEach(control => control.icon.tint = SECRET_DOOR_TINT)
+	}
+})
+
+// If door type has been changed, tint the door accordingly
+Hooks.on("updateWall", (scene, wall, update) => {
+	const types = CONST.WALL_DOOR_TYPES
+	if (wall.door === types.NONE)
+		return
+	const changedDoor = canvas.controls.doors.children.find(control => control.wall.data._id === wall._id);
+	if (wall.door === types.DOOR)
+		changedDoor.icon.tint = 0xFFFFFF
+	else if (wall.door === types.SECRET)
+		changedDoor.icon.tint = SECRET_DOOR_TINT
+	else
+		console.warn("Smart Doors | Encountered unknown door type " + wall.door + " while highlighting secret doors.")
+})
+
 // Inject our custom settings into the WallConfig dialog
 Hooks.on("renderWallConfig", (wallConfig, html, data) => {
 	// Settings for synchronized doors
@@ -272,12 +297,26 @@ function performMigrations() {
 		ui.notifications.error(game.i18n.localize("smart-doors.ui.messages.unknownVersion"), {permanent: true})
 }
 
+function reloadGM() {
+	if (game.user.isGM)
+		location.reload()
+}
+
 function registerSettings() {
 	game.settings.register(settingsKey, "dataVersion", {
 		scope: "world",
 		config: false,
 		type: String,
 		default: "fresh install"
+	})
+	game.settings.register(settingsKey, "highlightSecretDoors", {
+		name: "smart-doors.settings.highlightSecretDoors.name",
+		hint: "smart-doors.settings.highlightSecretDoors.hint",
+		scope: "world",
+		config: true,
+		type: Boolean,
+		default: true,
+		onChange: reloadGM,
 	})
 	game.settings.register(settingsKey, "lockedDoorAlert", {
 		name: "smart-doors.settings.lockedDoorAlert.name",
