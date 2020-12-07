@@ -179,7 +179,9 @@ function lockedDoorAlertLeftClick() {
 
 	// Create and send the chat message
 	const message = {}
-	message.user = game.user;
+	message.user = game.user
+	if (game.user.character)
+		message.speaker = {actor: game.user.character}
 	message.content = "Just tried to open a locked door"
 	message.sound = CONFIG.sounds.lock
 	message.flags = {smartdoors: {sourceId: this.wall.data._id}}
