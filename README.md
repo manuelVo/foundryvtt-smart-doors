@@ -3,6 +3,11 @@ Makes doors smarter. Allows doors to synchronize across multiple scenes and send
 
 ## Feature overview
 
+### Consistent Door Control Size
+![Consistent Door Control Size demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/e5b5c336d64f2b379914648f57aa07b6a69aadf1/media/door_control_size.webp)
+
+Door Control icons will be rendered the same size in every scene, regardless of the configured grid size. The size of the icons is configurable.
+
 ### Tint Secret Doors
 ![Tint Secret Doors demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/dc5d328cd9bc4a0e2aacc5c86ab59e15739cc6d1/media/tint_secret_doors.webp)
 
@@ -34,7 +39,7 @@ To set up door synchronization, assign all doors that should be synchronized to 
 
 Once a Synchronization Group is set up for multiple doors, simply open/close/lock/unlock one of the doors to achieve the same effect on other doors as well.
 
-## Planned features
+## Planned Features
 - Attach macros to doors that are being executed when the door is being opened/closed
 - Give out keys to players, that allow them to lock/unlock associated doors
 - Doors that can only be seen from one side when closed
