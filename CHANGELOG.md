@@ -6,6 +6,7 @@
 
 ### Bugfixes
 - In cloned scenes Locked Door Alerts will now only highlight the door in the correct scene
+- When adding a door to a synchronization group it will now assume the correct state if it's being synchronized with it's twin door on a cloned map
 
 ## v1.0.1
 - When adding a door to a synchronization group adjust it's state to bring it in sync with the other doors

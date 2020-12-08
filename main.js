@@ -151,7 +151,19 @@ async function onWallConfigUpdate(event, formData) {
 
 	// If a synchronization group is set, get the state of existing doors and assume their state
 	if (formData.synchronizationGroup) {
-		const doorInGroup = findInAllWalls(wall => wall.door && wall.flags.smartdoors?.synchronizationGroup == formData.synchronizationGroup && !ids.includes(wall._id));
+		// Search for other doors in the synchronization group that aren't in the list of edited doors
+		const doorInGroup = findInAllWalls(wall => {
+			// We only search for doors
+			if (!wall.door)
+				return false
+			// We only want doors in the same synchronization group
+			if (wall.flags.smartdoors?.synchronizationGroup !== formData.synchronizationGroup)
+				return false
+			// Doors on this scene that have their id included in `ids` are currently being changed. Ignore them.
+			if (wall.scene === canvas.scene && ids.includes(wall._id))
+				return false
+			return true
+		})
 		if (doorInGroup)
 			updateData.ds = doorInGroup.ds;
 	}
