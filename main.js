@@ -98,7 +98,13 @@ Hooks.on("updateWall", (scene, wall, update) => {
 	const types = CONST.WALL_DOOR_TYPES
 	if (wall.door === types.NONE)
 		return
+	// Find the door control corresponding to the changed door
 	const changedDoor = canvas.controls.doors.children.find(control => control.wall.data._id === wall._id);
+	// If the changed door doesn't have a control it's not on this scene - ignore it
+	if (!changedDoor)
+		return
+	// The wall object we got passed might be from another scene so we replace it with the door from the current scene
+	wall = changedDoor.wall.data
 	if (wall.door === types.DOOR)
 		changedDoor.icon.tint = 0xFFFFFF
 	else if (wall.door === types.SECRET)
@@ -289,7 +295,7 @@ function lockedDoorAlertLeftClick() {
 // Updates all doors in the specified synchronization group with the provided data
 function updateSynchronizedDoors(updateData, synchronizationGroup) {
 	// Search for doors belonging to the synchronization group in all scenes
-	let scenes = filterAllWalls(wall => wall.door && wall.flags.smartdoors?.synchronizationGroup == synchronizationGroup);
+	let scenes = filterAllWalls(wall => wall.door && wall.flags.smartdoors?.synchronizationGroup === synchronizationGroup);
 
 	// Update all doors in the synchronization group
 	scenes.forEach((scene) => {
