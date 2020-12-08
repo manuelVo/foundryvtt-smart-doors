@@ -1,7 +1,7 @@
 "use strict";
 
 const settingsKey = "smart-doors";
-const currentDataVersion = "1.0.0"
+const currentDataVersion = "1.1.0"
 
 Hooks.once("init", () => {
 	registerSettings()
@@ -17,13 +17,13 @@ Hooks.once("ready", () => {
 // Tint the source door red when a locked alert is hovered
 Hooks.on("renderChatMessage", (message, html, data) => {
 	// Tint the door that generated this message
-	const sourceId = message.data.flags.smartdoors?.sourceId
-	if (!sourceId)
+	const source = message.data.flags.smartdoors?.source
+	if (!source)
 		return
 
 	// Tint on mouse enter
 	const mouseEnter = function () {
-		const sourceDoor = canvas.controls.doors.children.find(door => door.wall.data._id == sourceId);
+		const sourceDoor = canvas.controls.doors.children.find(door => door.wall.data._id === source.wall && door.wall.scene.id === source.scene);
 		if (sourceDoor)
 			sourceDoor.icon.tint = 0xff0000;
 	}
@@ -31,7 +31,7 @@ Hooks.on("renderChatMessage", (message, html, data) => {
 
 	// Remove tint on mouse leave
 	const mouseLeave = function () {
-		const sourceDoor = canvas.controls.doors.children.find(door => door.wall.data._id == sourceId);
+		const sourceDoor = canvas.controls.doors.children.find(door => door.wall.data._id === source.wall && door.wall.scene.id === source.scene);
 		if (sourceDoor)
 			sourceDoor.icon.tint = 0xffffff;
 	}
@@ -269,7 +269,7 @@ function lockedDoorAlertLeftClick() {
 		message.speaker = {actor: game.user.character}
 	message.content = "Just tried to open a locked door"
 	message.sound = CONFIG.sounds.lock
-	message.flags = {smartdoors: {sourceId: this.wall.data._id}}
+	message.flags = {smartdoors: {source: {wall: this.wall.data._id, scene: this.wall.scene.id}}}
 	ChatMessage.create(message)
 	return true
 }
@@ -347,14 +347,57 @@ function synchronizedDoorsRightClick() {
 }
 
 function performMigrations() {
-	const dataVersion = game.settings.get(settingsKey, "dataVersion")
+	if (!game.user.isGM)
+		return
+
+	let dataVersion = game.settings.get(settingsKey, "dataVersion")
 	if (dataVersion === "fresh install")
 	{
 		game.settings.set(settingsKey, "dataVersion", currentDataVersion);
 		return;
 	}
+
+	if (dataVersion === "1.0.0") {
+		dataVersion = "1.1.0"
+		ui.notifications.info(game.i18n.format("smart-doors.ui.messages.migrating", {version: dataVersion}))
+
+		// Make a dictionary that maps all door ids to their scenes
+		const walls = game.scenes.reduce((dict, scene) => {
+			scene.data.walls.forEach(wall => {
+				if (!wall.door)
+					return
+				dict[wall._id] = scene.id
+			})
+			return dict
+		}, {})
+
+		// Migrate all messages that have a (wall) source id
+		game.messages.forEach(async message => {
+			const wallId = message.data.flags.smartdoors?.sourceId
+			if (!wallId)
+				return
+			const flags = message.data.flags
+			delete flags.smartdoors.sourceId
+			const scene = walls[wallId]
+			// If there is no wall with this id anymore we can drop the value. It has no purpose anymore
+			if (!scene) {
+				if (!message.data.flags.smartdoors)
+					delete flags.smartdoors
+			}
+			else {
+				// Assign the id and the scene id to the new data structure
+				flags.smartdoors.source = {wall: wallId, scene: scene}
+			}
+
+			// We have to disable recursive here so deleting keys will actually work
+			message.update({flags: flags}, {diff: false, recursive: false})
+		})
+
+		game.settings.set(settingsKey, "dataVersion", dataVersion)
+		ui.notifications.info(game.i18n.format("smart-doors.ui.messages.migrationDone", {version: dataVersion}))
+	}
 	if (dataVersion != currentDataVersion)
-		ui.notifications.error(game.i18n.localize("smart-doors.ui.messages.unknownVersion"), {permanent: true})
+		ui.notifications.error(game.i18n.format("smart-doors.ui.messages.unknownVersion", {version: dataVersion}), {permanent: true})
 }
 
 function reloadGM() {
