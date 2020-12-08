@@ -1,4 +1,4 @@
-## v1.1.0 (in development)
+## v1.1.0
 ### New features
 - Tint secret doors grey for the GM to differentiate them from regular doors
 - Toggle doors between secret and normal with ctrl+click
