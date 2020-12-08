@@ -313,7 +313,7 @@ function synchronizedDoorsLeftClick() {
 		return false
 
 	// If the door is locked there is nothing to synchronize
-	if (this.state === states.LOCKED)
+	if (state === states.LOCKED)
 		return false
 
 	// Calculate new door state
