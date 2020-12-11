@@ -1,6 +1,6 @@
 import {settingsKey} from "../settings.js"
 
-const SECRET_DOOR_TINT = 0x222222
+const SECRET_DOOR_TINT = 0x000000
 
 // Tint all secret doors dark grey
 export function onCanvasReady(currentCanvas) {
