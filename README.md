@@ -8,6 +8,11 @@ Makes doors smarter. Allows doors to synchronize across multiple scenes and send
 
 Door Control icons will be rendered the same size in every scene, regardless of the configured grid size. The size of the icons is configurable.
 
+### Door Control Outline
+![Door Control Outline demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/3b0018ddf424a2a369273029e0e1184a8bed848c/media/door_control_outline.webp)
+
+Door Control icons will be rendered with an outline to improve their visibility on bright backgrounds.
+
 ### Tint Secret Doors
 ![Tint Secret Doors demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/dc5d328cd9bc4a0e2aacc5c86ab59e15739cc6d1/media/tint_secret_doors.webp)
 

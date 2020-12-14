@@ -10,15 +10,6 @@ export function hookDoorControlReposition() {
 	}
 }
 
-export function hookDoorControlDraw() {
-	const originalHandler = DoorControl.prototype.draw
-	DoorControl.prototype.draw = async function () {
-		const result = await originalHandler.call(this)
-		onDoorControlPostDraw.call(this)
-		return result
-	}
-}
-
 // Set the size of all door controls in relation to the grid size so it'll have a constant percieved size
 export function onCanvasReady(currentCanvas) {
 	const doors = currentCanvas.controls.doors.children
@@ -26,7 +17,7 @@ export function onCanvasReady(currentCanvas) {
 }
 
 // Set the size of the door control in relation to the grid size so it'll have a constant percieved size
-function onDoorControlPostDraw() {
+export function onDoorControlPostDraw() {
 	// If the canvas isn't ready we'll do this after the "canvasReady" event is fired instead
 	if (!canvas.ready)
 		return

@@ -1,6 +1,7 @@
 "use strict";
 
 import * as DoorControlIconScale from "./features/door_control_icon_scale.js"
+import * as DoorControlOutline from "./features/door_control_outline.js"
 import * as HighlightSecretDoors from "./features/highlight_secret_doors.js"
 import * as LockedDoorAlert from "./features/locked_door_alert.js"
 import * as SynchronizedDoors from "./features/synchronized_doors.js"
@@ -13,7 +14,7 @@ Hooks.once("init", () => {
 	registerSettings()
 	hookDoorEvents()
 	hookWallConfigUpdate()
-	DoorControlIconScale.hookDoorControlDraw()
+	hookDoorControlDraw()
 	DoorControlIconScale.hookDoorControlReposition()
 })
 
@@ -24,7 +25,6 @@ Hooks.once("ready", () => {
 Hooks.on("renderChatMessage", LockedDoorAlert.onRenderChatMessage)
 
 Hooks.on("canvasReady", DoorControlIconScale.onCanvasReady)
-
 Hooks.on("canvasReady", HighlightSecretDoors.onCanvasReady)
 
 Hooks.on("updateWall", HighlightSecretDoors.onUpdateWall)
@@ -39,6 +39,16 @@ function hookWallConfigUpdate() {
 	WallConfig.prototype._updateObject = async function (event, formData) {
 		await originalHandler.call(this, event, formData)
 		return SynchronizedDoors.onWallConfigUpdate.call(this, event, formData)
+	}
+}
+
+function hookDoorControlDraw() {
+	const originalHandler = DoorControl.prototype.draw
+	DoorControl.prototype.draw = async function () {
+		const result = await originalHandler.call(this)
+		DoorControlIconScale.onDoorControlPostDraw.call(this)
+		DoorControlOutline.onDoorControlPostDraw.call(this)
+		return result
 	}
 }
 
