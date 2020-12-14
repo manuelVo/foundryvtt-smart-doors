@@ -1,4 +1,7 @@
 ## v1.2.0 (in development)
+### New features
+- Draw outlines around Door Control icons to increase their visibility
+
 ### Other
 - Secret doors are now tinted black instead of dark grey.
 

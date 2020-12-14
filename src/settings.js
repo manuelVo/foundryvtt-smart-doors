@@ -21,6 +21,15 @@ export function registerSettings() {
 		default: 1.5,
 		onChange: () => location.reload()
 	})
+	game.settings.register(settingsKey, "doorControlOutline", {
+		name: "smart-doors.settings.doorControlOutline.name",
+		hint: "smart-doors.settings.doorControlOutline.hint",
+		scope: "client",
+		config: true,
+		type: Boolean,
+		default: true,
+		onChange: () => location.reload(),
+	})
 	game.settings.register(settingsKey, "highlightSecretDoors", {
 		name: "smart-doors.settings.highlightSecretDoors.name",
 		hint: "smart-doors.settings.highlightSecretDoors.hint",
