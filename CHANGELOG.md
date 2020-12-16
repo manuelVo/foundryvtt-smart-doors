@@ -1,4 +1,4 @@
-## v1.2.0 (in development)
+## v1.2.0
 ### New features
 - Draw outlines around Door Control icons to increase their visibility
 
