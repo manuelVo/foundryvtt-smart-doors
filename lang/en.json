@@ -17,6 +17,10 @@
 				"name": "Locked Door Alert",
 				"hint": "Send a message in chat when a player tried to open a locked door"
 			},
+			"macros": {
+				"name": "Door Interaction Macros",
+				"hint": "Trigger a macro when a door is being interacted with"
+			},
 			"synchronizedDoors": {
 				"name": "Synchronized Doors",
 				"hint": "Synchronize the state of configured doors"
@@ -27,7 +31,22 @@
 			}
 		},
 		"ui": {
+			"form": {
+				"macroExecuteEverywhere": {
+					"name": "Execute on all clients",
+					"hint": "If disabled the macro will be executed on the GMs client"
+				},
+				"macroName": {
+					"name": "Macro Name",
+					"hint": "The name of the macro that should be executed when this door is interacted with. No macro is executed if left blank."
+				},
+				"macroArguments": {
+					"name": "Marco Parameters",
+					"hint": "The parameters passed to the macro. Any JSON string is valid."
+				}
+			},
 			"messages": {
+				"argsInvalidJson": "The macro arguments must be valid JSON. See console for details.",
 				"migrating": "Migrating Smart Doors to version {version}. Please don't close the application.",
 				"migrationDone": "Smart Doors successfully migrated to version {version}.",
 				"unknownVersion": "Smart Doors migration failed with the error: Unkown Version {version}. Please report this to the Smart Doors issue tracker. To prevent possible data loss don't use this plugin until this error is fixed."

@@ -1,9 +1,11 @@
 ## v1.1.0
 ### New features
 - Draw outlines around Door Control icons to increase their visibility
+- Execute a macro when someone interacts with a door
 
 ### Other
 - Secret doors are now tinted black instead of dark grey.
+- Setting hints will now be shown below the title of the setting (before it was above)
 
 ### New features
 - Tint secret doors grey for the GM to differentiate them from regular doors

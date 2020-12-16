@@ -18,9 +18,6 @@ export function onRederWallConfig(wallConfig, html, data) {
 		// Fill the injected input fields with values
 		const input = (name) => html.find(`input[name="${name}"]`)
 		input("synchronizationGroup").prop("value", smartdoorsData?.synchronizationGroup)
-
-		// Recalculate config window height
-		wallConfig.setPosition({height: "auto"})
 	}
 }
 

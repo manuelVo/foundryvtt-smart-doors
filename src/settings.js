@@ -63,4 +63,12 @@ export function registerSettings() {
 		type: Boolean,
 		default: true,
 	})
+	game.settings.register(settingsKey, "macros", {
+		name: "smart-doors.settings.macros.name",
+		hint: "smart-doors.settings.macros.hint",
+		scope: "world",
+		config: true,
+		type: Boolean,
+		default: true,
+	})
 }

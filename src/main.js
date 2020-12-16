@@ -2,6 +2,7 @@
 
 import * as DoorControlIconScale from "./features/door_control_icon_scale.js"
 import * as DoorControlOutline from "./features/door_control_outline.js"
+import * as ExecuteMacro from "./features/execute_macro.js"
 import * as HighlightSecretDoors from "./features/highlight_secret_doors.js"
 import * as LockedDoorAlert from "./features/locked_door_alert.js"
 import * as SynchronizedDoors from "./features/synchronized_doors.js"
@@ -30,15 +31,28 @@ Hooks.on("canvasReady", HighlightSecretDoors.onCanvasReady)
 Hooks.on("updateWall", HighlightSecretDoors.onUpdateWall)
 
 // Inject our custom settings into the WallConfig dialog
-Hooks.on("renderWallConfig", SynchronizedDoors.onRederWallConfig)
+Hooks.on("renderWallConfig", (wallConfig, html, data) => {
+	SynchronizedDoors.onRederWallConfig(wallConfig, html, data)
+	ExecuteMacro.onRederWallConfig(wallConfig, html, data)
+
+	// Recalculate config window position and height
+	wallConfig.element[0].style.top = "" // This forces foundry to re-calculate the top position
+	wallConfig.setPosition({height: "auto"})
+})
 
 // Hook the update function of the WallConfig dialog so we can store our custom data
 function hookWallConfigUpdate() {
 	// Replace the original function with our custom one
 	const originalHandler = WallConfig.prototype._updateObject;
 	WallConfig.prototype._updateObject = async function (event, formData) {
+		await ExecuteMacro.onWallConfigPreUpdate.call(this, event, formData)
+
 		await originalHandler.call(this, event, formData)
-		return SynchronizedDoors.onWallConfigUpdate.call(this, event, formData)
+
+		return Promise.all([
+			SynchronizedDoors.onWallConfigUpdate.call(this, event, formData),
+			ExecuteMacro.onWallConfigUpdate.call(this, event, formData),
+		])
 	}
 }
 
