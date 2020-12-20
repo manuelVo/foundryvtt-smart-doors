@@ -1,3 +1,7 @@
+## v1.2.1
+### Other
+- Verified compatibility with 0.7.9
+
 ## v1.2.0
 ### New features
 - Draw outlines around Door Control icons to increase their visibility
