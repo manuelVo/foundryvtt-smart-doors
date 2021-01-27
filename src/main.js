@@ -8,7 +8,7 @@ import * as SynchronizedDoors from "./features/synchronized_doors.js"
 import * as ToggleSecretDoor from "./features/toggle_secret_door.js"
 
 import {performMigrations} from "./migration.js"
-import {registerSettings} from "./settings.js"
+import {registerSettings, settingsKey} from "./settings.js"
 
 Hooks.once("init", () => {
 	registerSettings()
@@ -20,6 +20,17 @@ Hooks.once("init", () => {
 
 Hooks.once("ready", () => {
 	performMigrations()
+
+	// Check if arms-reach module is active and conflicting features are enabled
+	if (game.user.isGM && game.modules.get("arms-reach")?.active) {
+		// Our toggle-secret-door and arms-reach's hotkeyDoorInteraction conflict. Check if both are enabled.
+		if (game.settings.get(settingsKey, "toggleSecretDoors") && game.settings.get("arms-reach", "hotkeyDoorInteraction")) {
+			// Inform the user that they have incompatible features enabled
+			const incopatibilityMessage = game.i18n.localize("smart-doors.ui.messages.armsReachIncompatiblilty")
+			console.warn("Smart Doors | " + incopatibilityMessage)
+			ui.notifications.warn(incopatibilityMessage, {permanent: true})
+		}
+	}
 })
 
 Hooks.on("renderChatMessage", LockedDoorAlert.onRenderChatMessage)
