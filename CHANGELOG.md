@@ -1,4 +1,4 @@
-## In development
+## v1.2.2
 ### Bugfix
 - Disabled features are now less likely to interfere with other modules, increasing compatibility.
   - This module can now be used together with the `Arms Reach` module if the `Toggle Secret Doors` feature is disabled in the settings.
