@@ -3,7 +3,7 @@ import * as Util from "../util.js"
 
 // Inject settings for synchronized doors
 export function onRederWallConfig(wallConfig, html, data) {
-	if (data.isDoor && game.settings.get(settingsKey, "synchronizedDoors")) {
+	if (game.settings.get(settingsKey, "synchronizedDoors") && data.isDoor) {
 		// Inject settings
 		const synchronizedSettings = `
 			<p class="notes">${game.i18n.localize("smart-doors.ui.synchronizedDoors.description")}</p>

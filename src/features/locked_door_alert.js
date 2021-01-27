@@ -26,12 +26,12 @@ export function onRenderChatMessage(message, html, data) {
 
 // Creates a chat message stating that a player tried to open a locked door
 export function onDoorLeftClick() {
-	const state = this.wall.data.ds
-	const states = CONST.WALL_DOOR_STATES
-
 	// Check if this feature is enabled
 	if (!game.settings.get(settingsKey, "lockedDoorAlert"))
 		return false
+
+	const state = this.wall.data.ds
+	const states = CONST.WALL_DOOR_STATES
 
 	// Only create messages when the door is locked.
 	if (state != states.LOCKED)
