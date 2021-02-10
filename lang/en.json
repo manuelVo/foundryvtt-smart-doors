@@ -28,7 +28,6 @@
 		},
 		"ui": {
 			"messages": {
-				"armsReachIncompatiblilty": "You have the modules Smart Doors and Arms Reach activated. Those modules are known to conflict with each other. To resolve the conflict please disable either the \"Toggle Secret Doors\" setting of Smart Doors or the \"Hotkey 'e' for interaction\" setting of Arms Reach.",
 				"migrating": "Migrating Smart Doors to version {version}. Please don't close the application.",
 				"migrationDone": "Smart Doors successfully migrated to version {version}.",
 				"unknownVersion": "Smart Doors migration failed with the error: Unkown Version {version}. Please report this to the Smart Doors issue tracker. To prevent possible data loss don't use this plugin until this error is fixed."

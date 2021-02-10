@@ -1,3 +1,7 @@
+## In development
+### Other
+- Smart Doors is now compatible with Arms Reach
+
 ## v1.2.2
 ### Bugfix
 - Disabled features are now less likely to interfere with other modules, increasing compatibility.
