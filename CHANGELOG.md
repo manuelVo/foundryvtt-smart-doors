@@ -1,4 +1,4 @@
-## In development
+## v1.2.3
 ### Other
 - Smart Doors is now compatible with Arms Reach
 
