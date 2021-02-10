@@ -44,7 +44,7 @@ To set up door synchronization, assign all doors that should be synchronized to 
 
 Once a Synchronization Group is set up for multiple doors, simply open/close/lock/unlock one of the doors to achieve the same effect on other doors as well.
 
-## Planned Features
+## Features ideas
 - Attach macros to doors that are being executed when the door is being opened/closed
 - Give out keys to players, that allow them to lock/unlock associated doors
 - Doors that can only be seen from one side when closed
