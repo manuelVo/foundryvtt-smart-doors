@@ -1,4 +1,4 @@
-## In development
+## v1.2.4
 ### Bugfix
 - Fixed a race condition that may cause doors to not be properly synchronized across scenes
 
