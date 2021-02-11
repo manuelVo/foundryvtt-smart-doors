@@ -1,3 +1,7 @@
+## In development
+### Bugfix
+- Fixed a race condition that may cause doors to not be properly synchronized across scenes
+
 ## v1.2.3
 ### Other
 - Smart Doors is now compatible with Arms Reach

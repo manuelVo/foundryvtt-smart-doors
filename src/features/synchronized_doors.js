@@ -121,12 +121,13 @@ export function onDoorRightClick() {
 }
 
 // Updates all doors in the specified synchronization group with the provided data
-function updateSynchronizedDoors(updateData, synchronizationGroup) {
+async function updateSynchronizedDoors(updateData, synchronizationGroup) {
 	// Search for doors belonging to the synchronization group in all scenes
 	let scenes = Util.filterAllWalls(wall => wall.door && wall.flags.smartdoors?.synchronizationGroup === synchronizationGroup);
 
 	// Update all doors in the synchronization group
-	scenes.forEach((scene) => {
-		scene.scene.updateEmbeddedEntity("Wall", scene.walls.map((wall) => {return {_id: wall._id, ...updateData}}))
-	})
+	for (const scene of scenes) {
+		// When VFTT 0.8 is out look for a way to do this in a single call.
+		await scene.scene.updateEmbeddedEntity("Wall", scene.walls.map((wall) => {return {_id: wall._id, ...updateData}}))
+	}
 }
