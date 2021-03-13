@@ -1,4 +1,4 @@
-## In development
+## 1.2.5
 ### New features
 - Synchronized doors can now be configured to synchronize their secret door status as well
 
