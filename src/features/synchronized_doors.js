@@ -11,13 +11,18 @@ export function onRederWallConfig(wallConfig, html, data) {
 				<label for="synchronizationGroup">${game.i18n.localize("smart-doors.ui.synchronizedDoors.groupName")}</label>
 				<input type="text" name="synchronizationGroup"/>
 			</div>
+			<div class="form-group">
+				<label for="synchronizeSecretStatus">${game.i18n.localize("smart-doors.ui.synchronizedDoors.synchronizeSecretStatus")}</label>
+				<input type="checkbox" name="synchronizeSecretStatus" value="true"/>
+			</div>
 		`
 		html.find(".form-group").last().after(synchronizedSettings)
 
 		const smartdoorsData = data.object.flags.smartdoors
 		// Fill the injected input fields with values
-		const input = (name) => html.find(`input[name="${name}"]`)
+		const input = (name) => html.find(`input[name="${name}"]`); // input is a helper function to search for a input field by it's name
 		input("synchronizationGroup").prop("value", smartdoorsData?.synchronizationGroup)
+		input("synchronizeSecretStatus").prop("checked", smartdoorsData?.synchronizeSecretStatus);
 
 		// Recalculate config window height
 		wallConfig.setPosition({height: "auto"})
@@ -26,7 +31,8 @@ export function onRederWallConfig(wallConfig, html, data) {
 
 // Store our custom data from the WallConfig dialog
 export async function onWallConfigUpdate(event, formData) {
-	const updateData = {flags: {smartdoors: {synchronizationGroup: formData.synchronizationGroup}}}
+	const synchronizeSecretStatus = formData.synchronizeSecretStatus;
+	const updateData = {flags: {smartdoors: {synchronizationGroup: formData.synchronizationGroup}}};
 	let ids = this.options.editTargets;
 	if (ids.length == 0) {
 		ids = [this.object.data._id];
@@ -34,6 +40,9 @@ export async function onWallConfigUpdate(event, formData) {
 
 	// If a synchronization group is set, get the state of existing doors and assume their state
 	if (formData.synchronizationGroup) {
+		// Update the synchronizeSecretStatus flag
+		updateData.flags.smartdoors.synchronizeSecretStatus = synchronizeSecretStatus;
+
 		// Search for other doors in the synchronization group that aren't in the list of edited doors
 		const doorInGroup = Util.findInAllWalls(wall => {
 			// We only search for doors
@@ -47,8 +56,15 @@ export async function onWallConfigUpdate(event, formData) {
 				return false
 			return true
 		})
-		if (doorInGroup)
+		if (doorInGroup) {
+			// ds is the door sate in foundry
 			updateData.ds = doorInGroup.ds;
+
+			if (synchronizeSecretStatus) {
+				// door is the door type in foundry
+				updateData.door = doorInGroup.door
+			}
+		}
 	}
 
 	// Update all the edited walls
@@ -56,7 +72,13 @@ export async function onWallConfigUpdate(event, formData) {
 		dataset.push({_id: id, ...updateData})
 		return dataset
 	}, [])
-	return canvas.scene.updateEmbeddedEntity("Wall", updateDataset)
+	const updateResult = await canvas.scene.updateEmbeddedEntity("Wall", updateDataset);
+
+	// If door is synchronized, synchronize secret status among synchronized doors
+	if (formData.synchronizationGroup)
+		await updateSynchronizedDoors(updateData, formData.synchronizationGroup);
+
+	return updateResult;
 }
 
 // Update the state of all synchronized doors
@@ -121,7 +143,7 @@ export function onDoorRightClick() {
 }
 
 // Updates all doors in the specified synchronization group with the provided data
-async function updateSynchronizedDoors(updateData, synchronizationGroup) {
+export async function updateSynchronizedDoors(updateData, synchronizationGroup) {
 	// Search for doors belonging to the synchronization group in all scenes
 	let scenes = Util.filterAllWalls(wall => wall.door && wall.flags.smartdoors?.synchronizationGroup === synchronizationGroup);
 
