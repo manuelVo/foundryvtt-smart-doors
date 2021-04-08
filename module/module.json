@@ -3,6 +3,8 @@
 	"title": "Smart Doors",
 	"description": "Makes doors smarter. Allows doors to synchronize across multiple scenes and sends chat messages when players try to open locked doors.",
 	"version": "1.2.5",
+	"type": "module",
+	"socket": true,
 	"minimumCoreVersion" : "0.7.7",
 	"compatibleCoreVersion" : "0.7.9",
 	"authors": [
@@ -27,5 +29,7 @@
 	"download": "https://github.com/manuelVo/foundryvtt-smart-doors/archive/v1.2.5.zip",
 	"readme": "https://github.com/manuelVo/foundryvtt-smart-doors/blob/master/README.md",
 	"changelog": "https://github.com/manuelVo/foundryvtt-smart-doors/blob/master/CHANGELOG.md",
-	"bugs": "https://github.com/manuelVo/foundryvtt-smart-doors/issues"
+	"bugs": "https://github.com/manuelVo/foundryvtt-smart-doors/issues",
+  	"allowBugReporter": true
+
 }

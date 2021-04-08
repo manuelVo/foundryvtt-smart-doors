@@ -3,6 +3,22 @@
 # Smart Doors
 Makes doors smarter. Allows doors to synchronize across multiple scenes and sends chat messages when players try to open locked doors (and also tells you which of the doors).
 
+## Installation
+
+It's always easiest to install modules from the in game add-on browser.
+
+To install this module manually:
+1.  Inside the Foundry "Configuration and Setup" screen, click "Add-on Modules"
+2.  Click "Install Module"
+3.  In the "Manifest URL" field, paste the following url:
+`https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/master/src/module.json`
+4.  Click 'Install' and wait for installation to complete
+5.  Don't forget to enable the module in game using the "Manage Module" button
+
+### libWrapper
+
+This module uses the [libWrapper](https://github.com/ruipin/fvtt-lib-wrapper) library for wrapping core methods. It is a hard dependency and it is recommended for the best experience and compatibility with other modules.
+
 ## Feature overview
 
 ### Consistent Door Control Size
@@ -52,3 +68,14 @@ Once a Synchronization Group is set up for multiple doors, simply open/close/loc
 - Doors that can only be seen from one side when closed
 - Only allow doors to be opened of the character is near
 	- Doors that can only be opened from one side
+
+## Issues
+
+Any issues, bugs, or feature requests are always welcome to be reported directly to the [Issue Tracker](https://github.com/manuelVo/foundryvtt-smart-doors/issues ), or using the [Bug Reporter Module](https://foundryvtt.com/packages/bug-reporter/).
+
+
+## Acknowledgements
+
+Bootstrapped with League of Extraordinary FoundryVTT Developers  [foundry-vtt-types](https://github.com/League-of-Foundry-Developers/foundry-vtt-types).
+
+Mad props to the 'League of Extraordinary FoundryVTT Developers' community which helped me figure out a lot.
