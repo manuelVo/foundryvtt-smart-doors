@@ -1,13 +1,14 @@
+import { libWrapper } from "../../lib/libwrapper_shim.js"
 import {settingsKey} from "../settings.js"
 
 // Adjust the repositioning formula for the door controls
 export function hookDoorControlReposition() {
-	DoorControl.prototype.reposition = function () {
+	libWrapper.register("smart-doors", "DoorControl.prototype.reposition", function () {
 		let gridSize = this.wall.scene.data.grid
 		gridSize *= game.settings.get(settingsKey, "doorControlSizeFactor")
 		const pos = this.wall.midpoint.map(p => p - gridSize * 0.2)
 		this.position.set(...pos)
-	}
+	}, "OVERRIDE");
 }
 
 // Set the size of all door controls in relation to the grid size so it'll have a constant percieved size

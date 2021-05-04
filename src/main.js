@@ -1,5 +1,6 @@
 "use strict";
 
+import {libWrapper} from "../lib/libwrapper_shim.js";
 import * as DoorControlIconScale from "./features/door_control_icon_scale.js"
 import * as DoorControlOutline from "./features/door_control_outline.js"
 import * as HighlightSecretDoors from "./features/highlight_secret_doors.js"
@@ -35,45 +36,41 @@ Hooks.on("renderWallConfig", SynchronizedDoors.onRederWallConfig)
 // Hook the update function of the WallConfig dialog so we can store our custom data
 function hookWallConfigUpdate() {
 	// Replace the original function with our custom one
-	const originalHandler = WallConfig.prototype._updateObject;
-	WallConfig.prototype._updateObject = async function (event, formData) {
-		await originalHandler.call(this, event, formData)
+	libWrapper.register("smart-doors", "WallConfig.prototype._updateObject", async function (wrapped, event, formData) {
+		await wrapped(event, formData);
 		return SynchronizedDoors.onWallConfigUpdate.call(this, event, formData)
-	}
+	}, "WRAPPER");
 }
 
 function hookDoorControlDraw() {
-	const originalHandler = DoorControl.prototype.draw
-	DoorControl.prototype.draw = async function () {
-		const result = await originalHandler.call(this)
+	libWrapper.register("smart-doors", "DoorControl.prototype.draw", async function (wrapped) {
+		const result = await wrapped();
 		DoorControlIconScale.onDoorControlPostDraw.call(this)
 		DoorControlOutline.onDoorControlPostDraw.call(this)
-		return result
-	}
+		return result;
+	}, "WRAPPER");
 }
 
 // Hook mouse events on DoorControls to perform our logic.
 // If we successfully handled the event block the original handler. Forward the event otherwise.
 function hookDoorEvents() {
 	// Replace the original mousedown handler with our custom one
-	const originalMouseDownHandler = DoorControl.prototype._onMouseDown
-	DoorControl.prototype._onMouseDown = function (event) {
+	libWrapper.register("smart-doors", "DoorControl.prototype._onMouseDown", function (wrapped, event) {
 		// Call our handler first. Only allow the original handler to run if our handler returns true
 		const eventHandled = onDoorMouseDown.call(this, event)
 		if (eventHandled)
 			return
-		return originalMouseDownHandler.call(this, event)
-	}
+		return wrapped(event);
+	}, "MIXED");
 
 	// Replace the original rightdown handler with our custom one
-	const originalRightDownHandler = DoorControl.prototype._onRightDown
-	DoorControl.prototype._onRightDown = function (event) {
+	libWrapper.register("smart-doors", "DoorControl.prototype._onRightDown", function (wrapped, event) {
 		// Call our handler first. Only allow the original handler to run if our handler returns true
 		const eventHandled = onDoorRightDown.call(this, event)
 		if (eventHandled)
 			return
-		return originalRightDownHandler.call(this, event)
-	}
+		return wrapped(event);
+	}, "MIXED");
 }
 
 // Our custom handler for mousedown events on doors
