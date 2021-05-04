@@ -1,4 +1,4 @@
-## In development
+## 1.2.6
 ### Compatibility
 - Smart Doors now uses the libwrapper module and as a result is now compatible with the module "FoundryVTT Arms Reach"
 
