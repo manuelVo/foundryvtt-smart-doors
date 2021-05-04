@@ -9,7 +9,7 @@ export function onRenderChatMessage(message, html, data) {
 
 	// Tint on mouse enter
 	const mouseEnter = function () {
-		const sourceDoor = canvas.controls.doors.children.find(door => door.wall.data._id === source.wall && door.wall.scene.id === source.scene);
+		const sourceDoor = canvas.controls.doors.children.find(door => door.wall.id === source.wall && door.wall.scene.id === source.scene);
 		if (sourceDoor)
 			sourceDoor.icon.tint = 0xff0000;
 	}
@@ -17,7 +17,7 @@ export function onRenderChatMessage(message, html, data) {
 
 	// Remove tint on mouse leave
 	const mouseLeave = function () {
-		const sourceDoor = canvas.controls.doors.children.find(door => door.wall.data._id === source.wall && door.wall.scene.id === source.scene);
+		const sourceDoor = canvas.controls.doors.children.find(door => door.wall.id === source.wall && door.wall.scene.id === source.scene);
 		if (sourceDoor)
 			sourceDoor.icon.tint = 0xffffff;
 	}
@@ -34,7 +34,7 @@ export function onDoorLeftClick() {
 	const states = CONST.WALL_DOOR_STATES
 
 	// Only create messages when the door is locked.
-	if (state != states.LOCKED)
+	if (state !== states.LOCKED)
 		return false
 
 	// Generate no message if the gm attempts to open the door
@@ -43,7 +43,7 @@ export function onDoorLeftClick() {
 
 	// Create and send the chat message
 	const message = {}
-	message.user = game.user
+	message.user = game.user.id;
 	if (game.user.character)
 		message.speaker = {actor: game.user.character}
 	message.content = "Just tried to open a locked door"

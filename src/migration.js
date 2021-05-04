@@ -20,9 +20,9 @@ export function performMigrations() {
 		// Make a dictionary that maps all door ids to their scenes
 		const walls = game.scenes.reduce((dict, scene) => {
 			scene.data.walls.forEach(wall => {
-				if (!wall.door)
+				if (!wall.data.door)
 					return
-				dict[wall._id] = scene.id
+				dict[wall.id] = scene.id;
 			})
 			return dict
 		}, {})

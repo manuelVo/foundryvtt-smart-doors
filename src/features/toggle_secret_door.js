@@ -12,7 +12,7 @@ export function onDoorLeftClick(event) {
 		if (game.settings.get(settingsKey, "synchronizedDoors") && synchronizationGroup && this.wall.data.flags.smartdoors?.synchronizeSecretStatus)
 			updateSynchronizedDoors(updateData, synchronizationGroup)
 		else
-			this.wall.update(updateData)
+			this.wall.document.update(updateData)
 
 		return true
 	}

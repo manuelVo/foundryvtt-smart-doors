@@ -1,4 +1,7 @@
 ## In development
+### Compatibility
+- Smart Doors is now compatible with Foundry 0.8.5
+
 ### Feature removals
 - The door icons now have outlines by defualt in Foundry. As a result the "Door Icon Outline" feature was removed.
 - Secret doors now have a different icon from regular doors in Foundry, making the "Tint Secret Doors" feature redundant. As a result it was removed.

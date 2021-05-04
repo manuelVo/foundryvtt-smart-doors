@@ -35,7 +35,7 @@ export async function onWallConfigUpdate(event, formData) {
 	const updateData = {flags: {smartdoors: {synchronizationGroup: formData.synchronizationGroup}}};
 	let ids = this.options.editTargets;
 	if (ids.length == 0) {
-		ids = [this.object.data._id];
+		ids = [this.object.id];
 	}
 
 	// If a synchronization group is set, get the state of existing doors and assume their state
@@ -46,33 +46,30 @@ export async function onWallConfigUpdate(event, formData) {
 		// Search for other doors in the synchronization group that aren't in the list of edited doors
 		const doorInGroup = Util.findInAllWalls(wall => {
 			// We only search for doors
-			if (!wall.door)
+			if (!wall.data.door)
 				return false
 			// We only want doors in the same synchronization group
-			if (wall.flags.smartdoors?.synchronizationGroup !== formData.synchronizationGroup)
+			if (wall.data.flags.smartdoors?.synchronizationGroup !== formData.synchronizationGroup)
 				return false
 			// Doors on this scene that have their id included in `ids` are currently being changed. Ignore them.
-			if (wall.scene === canvas.scene && ids.includes(wall._id))
+			if (wall.parent.id === canvas.scene.id && ids.includes(wall.id))
 				return false
 			return true
 		})
 		if (doorInGroup) {
 			// ds is the door sate in foundry
-			updateData.ds = doorInGroup.ds;
+			updateData.ds = doorInGroup.data.ds;
 
 			if (synchronizeSecretStatus) {
 				// door is the door type in foundry
-				updateData.door = doorInGroup.door
+				updateData.door = doorInGroup.data.door;
 			}
 		}
 	}
 
 	// Update all the edited walls
-	const updateDataset = ids.reduce((dataset, id) => {
-		dataset.push({_id: id, ...updateData})
-		return dataset
-	}, [])
-	const updateResult = await canvas.scene.updateEmbeddedEntity("Wall", updateDataset);
+	const updateDataset = ids.map(id => {return {_id: id, ...updateData}});
+	const updateResult = await canvas.scene.updateEmbeddedDocuments("Wall", updateDataset);
 
 	// If door is synchronized, synchronize secret status among synchronized doors
 	if (formData.synchronizationGroup)
@@ -143,13 +140,10 @@ export function onDoorRightClick() {
 }
 
 // Updates all doors in the specified synchronization group with the provided data
-export async function updateSynchronizedDoors(updateData, synchronizationGroup) {
+export function updateSynchronizedDoors(updateData, synchronizationGroup) {
 	// Search for doors belonging to the synchronization group in all scenes
-	let scenes = Util.filterAllWalls(wall => wall.door && wall.flags.smartdoors?.synchronizationGroup === synchronizationGroup);
+	let scenes = Util.filterAllWalls(wall => wall.data.door && wall.data.flags.smartdoors?.synchronizationGroup === synchronizationGroup);
 
 	// Update all doors in the synchronization group
-	for (const scene of scenes) {
-		// When VFTT 0.8 is out look for a way to do this in a single call.
-		await scene.scene.updateEmbeddedEntity("Wall", scene.walls.map((wall) => {return {_id: wall._id, ...updateData}}))
-	}
+	return Promise.all(scenes.map(scene => scene.scene.updateEmbeddedDocuments("Wall", scene.walls.map((wall) => {return {_id: wall.id, ...updateData}}))));
 }

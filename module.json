@@ -3,8 +3,8 @@
 	"title": "Smart Doors",
 	"description": "Makes doors smarter. Allows doors to synchronize across multiple scenes and sends chat messages when players try to open locked doors.",
 	"version": "1.2.6",
-	"minimumCoreVersion" : "0.7.7",
-	"compatibleCoreVersion" : "0.7.9",
+	"minimumCoreVersion" : "0.8.5",
+	"compatibleCoreVersion" : "0.8.5",
 	"authors": [
 		{
 			"name": "Manuel Vögele",
