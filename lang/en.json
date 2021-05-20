@@ -1,17 +1,9 @@
 {
     "smart-doors": {
 		"settings": {
-			"doorControlOutline": {
-				"name": "Door Control Outline",
-				"hint": "Draw outlines around Door Control icons to increase their visiblity"
-			},
 			"doorControlSizeFactor": {
 				"name": "Door Control Size Factor",
 				"hint": "Defines by which factor the size of the door control icons should be scaled up"
-			},
-			"highlightSecretDoors": {
-				"name": "Tint Secret Doors",
-				"hint": "Shade secret doors in a different color on the gm screen to differentiate them from normal doors"
 			},
 			"lockedDoorAlert": {
 				"name": "Locked Door Alert",

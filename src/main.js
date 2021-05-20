@@ -2,8 +2,6 @@
 
 import {libWrapper} from "../lib/libwrapper_shim.js";
 import * as DoorControlIconScale from "./features/door_control_icon_scale.js"
-import * as DoorControlOutline from "./features/door_control_outline.js"
-import * as HighlightSecretDoors from "./features/highlight_secret_doors.js"
 import * as LockedDoorAlert from "./features/locked_door_alert.js"
 import * as SynchronizedDoors from "./features/synchronized_doors.js"
 import * as ToggleSecretDoor from "./features/toggle_secret_door.js"
@@ -26,9 +24,6 @@ Hooks.once("ready", () => {
 Hooks.on("renderChatMessage", LockedDoorAlert.onRenderChatMessage)
 
 Hooks.on("canvasReady", DoorControlIconScale.onCanvasReady)
-Hooks.on("canvasReady", HighlightSecretDoors.onCanvasReady)
-
-Hooks.on("updateWall", HighlightSecretDoors.onUpdateWall)
 
 // Inject our custom settings into the WallConfig dialog
 Hooks.on("renderWallConfig", SynchronizedDoors.onRederWallConfig)
@@ -46,7 +41,6 @@ function hookDoorControlDraw() {
 	libWrapper.register("smart-doors", "DoorControl.prototype.draw", async function (wrapped) {
 		const result = await wrapped();
 		DoorControlIconScale.onDoorControlPostDraw.call(this)
-		DoorControlOutline.onDoorControlPostDraw.call(this)
 		return result;
 	}, "WRAPPER");
 }

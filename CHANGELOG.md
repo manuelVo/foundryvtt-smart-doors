@@ -1,3 +1,8 @@
+## In development
+### Feature removals
+- The door icons now have outlines by defualt in Foundry. As a result the "Door Icon Outline" feature was removed.
+- Secret doors now have a different icon from regular doors in Foundry, making the "Tint Secret Doors" feature redundant. As a result it was removed.
+
 ## 1.2.6
 ### Compatibility
 - Smart Doors now uses the libwrapper module and as a result is now compatible with the module "FoundryVTT Arms Reach"
