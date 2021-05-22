@@ -1,4 +1,4 @@
-## In development
+## 1.2.7
 ### Compatibility
 - Smart Doors is now compatible with Foundry 0.8.5
 
