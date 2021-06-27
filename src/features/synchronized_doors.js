@@ -33,7 +33,7 @@ export function onRederWallConfig(wallConfig, html, data) {
 export async function onWallConfigUpdate(event, formData) {
 	const synchronizeSecretStatus = formData.synchronizeSecretStatus;
 	const updateData = {flags: {smartdoors: {synchronizationGroup: formData.synchronizationGroup}}};
-	let ids = this.options.editTargets;
+	let ids = this.editTargets;
 	if (ids.length == 0) {
 		ids = [this.object.id];
 	}
