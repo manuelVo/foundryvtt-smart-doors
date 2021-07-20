@@ -1,3 +1,7 @@
+## 1.2.9
+### Feature revival
+- The "Tint secret doors" feature is back, but will remain disabled by default.
+
 ## 1.2.8
 ### Compatibility
 - Smart Doors is now compatible with Foundry 0.8.8
