@@ -10,12 +10,6 @@ Makes doors smarter. Allows doors to synchronize across multiple scenes and send
 
 Door Control icons will be rendered the same size in every scene, regardless of the configured grid size. The size of the icons is configurable.
 
-### Tint Secret Doors
-![Tint Secret Doors demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/dc5d328cd9bc4a0e2aacc5c86ab59e15739cc6d1/media/tint_secret_doors.webp)
-
-Which where the secret doors again? This tints all secret doors grey in the GM view, allowing to easily differentiate between normal and secret doors.
-
-
 ### Toggle Secret Doors
 ![Toggle Secret Doors demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/da5872042ea81e2f41875a193d161331a81a2b6d/media/secret_door_toggle.webp)
 
@@ -28,6 +22,10 @@ Easily reveal secret doors to players. Ctrl+left click secrets doors to turn the
 Keep everyone informed who tried to open which door. Whenever a player tries to open a door that is locked, a chat message stating that fact will be sent to all players. Additionally the door locked sound will be played for everyone. When the chat message is hovered with the mouse, the door that the player tried to open will be highlighted.
 
 If the GM tries to open a locked door the sound will only played for him and no chat message will be sent.
+
+### Tint Secret Doors
+This tints secret doors in a gay shade to make them easier to discern from regular doors when being zoomed further out.
+
 
 ### Synchronized Doors
 ![Synchronized Doors demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/360d724240634dbc6cc493a3b62243a8b28b7056/media/synchronized_doors.webp)

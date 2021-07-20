@@ -1,5 +1,10 @@
 export const settingsKey = "smart-doors";
 
+function reloadGM() {
+	if (game.user.isGM)
+		location.reload()
+}
+
 export function registerSettings() {
 	game.settings.register(settingsKey, "dataVersion", {
 		scope: "world",
@@ -15,6 +20,15 @@ export function registerSettings() {
 		type: Number,
 		default: 1.5,
 		onChange: () => location.reload()
+	})
+	game.settings.register(settingsKey, "highlightSecretDoors", {
+		name: "smart-doors.settings.highlightSecretDoors.name",
+		hint: "smart-doors.settings.highlightSecretDoors.hint",
+		scope: "world",
+		config: true,
+		type: Boolean,
+		default: false,
+		onChange: reloadGM,
 	})
 	game.settings.register(settingsKey, "toggleSecretDoors", {
 		name: "smart-doors.settings.toggleSecretDoors.name",

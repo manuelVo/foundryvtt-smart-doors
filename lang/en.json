@@ -5,6 +5,10 @@
 				"name": "Door Control Size Factor",
 				"hint": "Defines by which factor the size of the door control icons should be scaled up"
 			},
+			"highlightSecretDoors": {
+				"name": "Tint Secret Doors",
+				"hint": "Shade secret doors in a different color on the gm screen to differentiate them from normal doors"
+			},
 			"lockedDoorAlert": {
 				"name": "Locked Door Alert",
 				"hint": "Send a message in chat when a player tried to open a locked door"
