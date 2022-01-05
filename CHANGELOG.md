@@ -1,3 +1,8 @@
+## 1.3.1
+### Bugfixes
+- The keybinding to toggle secret doors no longer supresses other keybindings that are assigned to the same key
+
+
 ## 1.3.0
 ### New features
 - The keybinding for the Toggle Secret Door feature can now be reconfigured via Foundries keybinding configuration (the default key has changed to AltLeft)
