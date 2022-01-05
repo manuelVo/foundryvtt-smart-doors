@@ -1,5 +1,11 @@
 {
     "smart-doors": {
+		"keybindings": {
+			"toggleSecretDoor": {
+				"name": "Toggle Secret Door",
+				"hint": "While this key is being pressed, clicking on doors will cause the to toggle between normal and secret door"
+			}
+		},
 		"settings": {
 			"doorControlSizeFactor": {
 				"name": "Door Control Size Factor",
@@ -16,10 +22,6 @@
 			"synchronizedDoors": {
 				"name": "Synchronized Doors",
 				"hint": "Synchronize the state of configured doors"
-			},
-			"toggleSecretDoors": {
-				"name": "Toggle Secret Doors",
-				"hint": "Toggle the door type between normal and secret using ctrl+left click"
 			}
 		},
 		"ui": {

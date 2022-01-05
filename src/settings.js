@@ -30,14 +30,6 @@ export function registerSettings() {
 		default: false,
 		onChange: reloadGM,
 	})
-	game.settings.register(settingsKey, "toggleSecretDoors", {
-		name: "smart-doors.settings.toggleSecretDoors.name",
-		hint: "smart-doors.settings.toggleSecretDoors.hint",
-		scope: "world",
-		config: true,
-		type: Boolean,
-		default: true,
-	})
 	game.settings.register(settingsKey, "lockedDoorAlert", {
 		name: "smart-doors.settings.lockedDoorAlert.name",
 		hint: "smart-doors.settings.lockedDoorAlert.hint",

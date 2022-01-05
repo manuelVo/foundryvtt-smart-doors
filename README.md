@@ -13,7 +13,7 @@ Door Control icons will be rendered the same size in every scene, regardless of 
 ### Toggle Secret Doors
 ![Toggle Secret Doors demonstration](https://raw.githubusercontent.com/manuelVo/foundryvtt-smart-doors/da5872042ea81e2f41875a193d161331a81a2b6d/media/secret_door_toggle.webp)
 
-Easily reveal secret doors to players. Ctrl+left click secrets doors to turn them into regular doors. Ctrl+left click can also be done on normal doors to turn them into secret doors. Using this in combination with Tint Secret Doors is recommended so you can actually see what you are doing.
+Easily reveal secret doors to players. Alt+left click secrets doors to turn them into regular doors. Alt+left click can also be done on normal doors to turn them into secret doors. The keybinding for this feature can be reconfigured.
 
 
 ### Locked Door Alerts

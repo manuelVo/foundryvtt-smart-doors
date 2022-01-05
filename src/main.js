@@ -8,10 +8,13 @@ import * as SynchronizedDoors from "./features/synchronized_doors.js"
 import * as ToggleSecretDoor from "./features/toggle_secret_door.js"
 
 import {performMigrations} from "./migration.js"
+import {registerKeybindings} from "./keybindings.js"
 import {registerSettings, settingsKey} from "./settings.js"
 
 Hooks.once("init", () => {
 	registerSettings()
+	registerKeybindings()
+
 	hookDoorEvents()
 	hookWallConfigUpdate()
 	hookDoorControlDraw()
