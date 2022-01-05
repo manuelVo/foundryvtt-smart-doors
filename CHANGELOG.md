@@ -1,3 +1,14 @@
+## 1.3.0
+### New features
+- The keybinding for the Toggle Secret Door feature can now be reconfigured via Foundries keybinding configuration (the default key has changed to AltLeft)
+
+### Compatibility
+- Smart Doors is now compatible with Foundry 9
+
+### Translation
+- Added french translation (thanks to Elfenduli)
+
+
 ## 1.2.9
 ### Feature revival
 - The "Tint secret doors" feature is back, but will remain disabled by default.
