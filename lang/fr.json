@@ -1,0 +1,35 @@
+{
+	"smart-doors": {
+		"settings": {
+			"doorControlSizeFactor": {
+				"name": "Facteur de taille de commande de porte",
+				"hint": "Définit par quel facteur la taille des icônes de contrôle de porte doit être agrandie"
+			},
+			"highlightSecretDoors": {
+				"name": "Teinte des portes secrètes",
+				"indice": "Ombragez les portes secrètes d'une couleur différente sur l'écran gm pour les différencier des portes normales"
+			},
+			"lockedDoorAlert": {
+				"name": "Alerte de porte verrouillée",
+				"hint": "Envoyer un message dans le chat lorsqu'un joueur essaie d'ouvrir une porte verrouillée"
+			},
+			"synchronizedDoors": {
+				"name": "Portes synchronisées",
+				"hint": "Synchroniser l'état des portes configurées"
+			}
+		}
+	},
+	"ui": {
+		"messages": {
+			"migrating": "Migration de Smart Doors vers la version {version}. Veuillez ne pas fermer l'application.",
+			"migrationDone": "Smart Doors a migré avec succès vers la version {version}.",
+			"unknownVersion": "La migration de Smart Doors a échoué avec l'erreur : Version inconnue {version}. Veuillez le signaler à l'outil de suivi des problèmes Smart Doors. Pour éviter une éventuelle perte de données, n'utilisez pas ce plug-in tant que cette erreur n'est pas corrigée."
+		},
+		"synchronizedDoors": {
+			"description": "Les changements d'état des portes dans le même groupe de synchronisation seront synchronisés entre les scènes. Laissez vide pour désactiver la synchronisation pour cette porte.",
+			"groupName": "Groupe de synchronisation",
+			"synchronizeSecretStatus": "Synchroniser le statut Secret"
+		}
+	}
+}
+}
