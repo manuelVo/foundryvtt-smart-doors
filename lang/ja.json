@@ -1,0 +1,40 @@
+{
+    "smart-doors": {
+		"keybindings": {
+			"toggleSecretDoor": {
+				"name": "シークレット・ドア切替",
+				"hint": "このキーを押しながらドアをクリックすると、シークレット・ドアと通常のドアを切り替えます。"
+			}
+		},
+		"settings": {
+			"doorControlSizeFactor": {
+				"name": "扉アイコンの大きさ",
+				"hint": "扉アイコンをどの程度大きくスケールアップするか設定します。"
+			},
+			"highlightSecretDoors": {
+				"name": "シークレット・ドア色",
+				"hint": "シークレット・ドアに異なる色を重ねることで、GM側から視認しやすくなります。"
+			},
+			"lockedDoorAlert": {
+				"name": "ロック中通知",
+				"hint": "ロックされた扉を誰かが開けようとした時チャットに通知を表示します。"
+			},
+			"synchronizedDoors": {
+				"name": "扉の同期",
+				"hint": "設定した扉の状態を同期させます。"
+			}
+		},
+		"ui": {
+			"messages": {
+				"migrating": "Smart Doorsをバージョン{version}。にマイグレーションしています。FVTTを終了しないでください。",
+				"migrationDone": "Smart Doorsバージョン{version}のマイグレーションに成功しました。",
+				"unknownVersion": "Smart Doorsのマイグレーションに失敗しました。エラー：不明なバージョン{version}。Smart Doorsのissue trackerに報告していただくか、オンセ工房のDiscordサーバまでご報告ください。データの損失が起こりうる可能性がありますので、このエラーが解消されるまで使用しないでください。"
+			},
+			"synchronizedDoors": {
+				"description": "同じ同期グループにいる扉はシーンをまたいで状態が同期されます。空の場合はこの扉の同期を無効化します。",
+				"groupName": "同期グループ名",
+				"synchronizeSecretStatus": "シークレット状態同期"
+			}
+		}
+	}
+}
