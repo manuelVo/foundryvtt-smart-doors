@@ -22,6 +22,9 @@ export function onRenderChatMessage(message, html, data) {
 			sourceDoor.icon.tint = 0xffffff;
 	}
 	html.on("mouseleave", mouseLeave);
+
+	// Localize the message
+	html.find(".message-content")[0].innerText = game.i18n.localize("smart-doors.ui.lockedDoorAlert");
 }
 
 // Creates a chat message stating that a player tried to open a locked door
@@ -46,7 +49,7 @@ export function onDoorLeftClick() {
 	message.user = game.user.id;
 	if (game.user.character)
 		message.speaker = {actor: game.user.character}
-	message.content = "Just tried to open a locked door"
+	message.content = game.i18n.localize("smart-doors.ui.lockedDoorAlert");
 	message.sound = CONFIG.sounds.lock
 	message.flags = {smartdoors: {source: {wall: this.wall.data._id, scene: this.wall.scene.id}}}
 	ChatMessage.create(message)

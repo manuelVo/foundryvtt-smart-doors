@@ -25,6 +25,7 @@
 			}
 		},
 		"ui": {
+			"lockedDoorAlert": "Just tried to open a locked door",
 			"messages": {
 				"migrating": "Migrating Smart Doors to version {version}. Please don't close the application.",
 				"migrationDone": "Smart Doors successfully migrated to version {version}.",
