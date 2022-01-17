@@ -1,3 +1,12 @@
+## 1.3.2
+### Bugfixes
+- The message sent to chat when triggering a locke door alert can now be translated
+
+### Translation
+- Added japanese translation (thanks to touge)
+- Added german translation
+
+
 ## 1.3.1
 ### Bugfixes
 - The keybinding to toggle secret doors no longer supresses other keybindings that are assigned to the same key
