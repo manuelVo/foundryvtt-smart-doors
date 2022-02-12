@@ -24,7 +24,7 @@ Keep everyone informed who tried to open which door. Whenever a player tries to 
 If the GM tries to open a locked door the sound will only played for him and no chat message will be sent.
 
 ### Tint Secret Doors
-This tints secret doors in a gay shade to make them easier to discern from regular doors when being zoomed further out.
+This tints secret doors in a gray shade to make them easier to discern from regular doors when being zoomed further out.
 
 
 ### Synchronized Doors
