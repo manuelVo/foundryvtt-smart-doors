@@ -2,7 +2,11 @@ export const settingsKey = "smart-doors";
 
 function reloadGM() {
 	if (game.user.isGM)
-		location.reload()
+		delayedReload()
+}
+
+function delayedReload() {
+	window.setTimeout(() => location.reload(), 500);
 }
 
 export function registerSettings() {
@@ -19,7 +23,7 @@ export function registerSettings() {
 		config: true,
 		type: Number,
 		default: 1.5,
-		onChange: () => location.reload()
+		onChange: delayedReload,
 	})
 	game.settings.register(settingsKey, "highlightSecretDoors", {
 		name: "smart-doors.settings.highlightSecretDoors.name",
