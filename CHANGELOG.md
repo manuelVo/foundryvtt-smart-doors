@@ -1,3 +1,9 @@
+## 1.3.3
+### Bugfixes
+- Fixed a bug that could cause some settings to not apply if multiple settings were changed at once
+- Fixed a bug that caused the french translation to not work
+
+
 ## 1.3.2
 ### Bugfixes
 - The message sent to chat when triggering a locke door alert can now be translated
