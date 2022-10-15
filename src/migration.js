@@ -19,8 +19,8 @@ export function performMigrations() {
 
 		// Make a dictionary that maps all door ids to their scenes
 		const walls = game.scenes.reduce((dict, scene) => {
-			scene.data.walls.forEach(wall => {
-				if (!wall.data.door) return;
+			scene.walls.forEach(wall => {
+				if (!wall.door) return;
 				dict[wall.id] = scene.id;
 			});
 			return dict;
@@ -28,14 +28,14 @@ export function performMigrations() {
 
 		// Migrate all messages that have a (wall) source id
 		game.messages.forEach(async message => {
-			const wallId = message.data.flags.smartdoors?.sourceId;
+			const wallId = message.flags.smartdoors?.sourceId;
 			if (!wallId) return;
-			const flags = message.data.flags;
+			const flags = message.flags;
 			delete flags.smartdoors.sourceId;
 			const scene = walls[wallId];
 			// If there is no wall with this id anymore we can drop the value. It has no purpose anymore
 			if (!scene) {
-				if (!message.data.flags.smartdoors) delete flags.smartdoors;
+				if (!message.flags.smartdoors) delete flags.smartdoors;
 			} else {
 				// Assign the id and the scene id to the new data structure
 				flags.smartdoors.source = {wall: wallId, scene: scene};

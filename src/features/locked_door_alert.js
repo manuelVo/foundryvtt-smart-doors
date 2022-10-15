@@ -3,7 +3,7 @@ import {settingsKey} from "../settings.js";
 // Tint the source door red when a locked alert is hovered
 export function onRenderChatMessage(message, html, data) {
 	// Tint the door that generated this message
-	const source = message.data.flags.smartdoors?.source;
+	const source = message.flags.smartdoors?.source;
 	if (!source) return;
 
 	// Tint on mouse enter
@@ -33,7 +33,7 @@ export function onDoorLeftClick() {
 	// Check if this feature is enabled
 	if (!game.settings.get(settingsKey, "lockedDoorAlert")) return false;
 
-	const state = this.wall.data.ds;
+	const state = this.wall.document.ds;
 	const states = CONST.WALL_DOOR_STATES;
 
 	// Only create messages when the door is locked.
@@ -48,7 +48,7 @@ export function onDoorLeftClick() {
 	if (game.user.character) message.speaker = {actor: game.user.character};
 	message.content = game.i18n.localize("smart-doors.ui.lockedDoorAlert");
 	message.sound = CONFIG.sounds.lock;
-	message.flags = {smartdoors: {source: {wall: this.wall.data._id, scene: this.wall.scene.id}}};
+	message.flags = {smartdoors: {source: {wall: this.wall.id, scene: this.wall.scene.id}}};
 	ChatMessage.create(message);
 	return true;
 }

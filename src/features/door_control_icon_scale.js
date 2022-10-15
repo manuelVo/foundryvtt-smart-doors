@@ -7,7 +7,7 @@ export function hookDoorControlReposition() {
 		"smart-doors",
 		"DoorControl.prototype.reposition",
 		function () {
-			let gridSize = this.wall.scene.data.grid;
+			let gridSize = this.wall.scene.grid.size;
 			gridSize *= game.settings.get(settingsKey, "doorControlSizeFactor");
 			const pos = this.wall.midpoint.map(p => p - gridSize * 0.2);
 			this.position.set(...pos);
@@ -32,7 +32,7 @@ export function onDoorControlPostDraw() {
 
 // Resizes the door control according to the grid size
 function fixDoorControlSize(control) {
-	let gridSize = control.wall.scene.data.grid;
+	let gridSize = control.wall.scene.grid.size;
 	gridSize *= game.settings.get(settingsKey, "doorControlSizeFactor");
 	control.icon.width = control.icon.height = gridSize * 0.4;
 	control.hitArea = new PIXI.Rectangle(

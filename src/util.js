@@ -2,7 +2,7 @@
 export function filterAllWalls(filterFn) {
 	// Find all walls that match the filter criteria
 	const scenes = game.scenes.map(scene => {
-		return {scene: scene, walls: scene.data.walls.filter(filterFn)};
+		return {scene: scene, walls: scene.walls.filter(filterFn)};
 	});
 	// Drop all scenes that don't contain any results
 	return scenes.filter(scene => scene.walls.length > 0);

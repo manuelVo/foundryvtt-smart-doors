@@ -3,7 +3,7 @@ import * as Util from "../util.js";
 
 // Inject settings for synchronized doors
 export function onRederWallConfig(wallConfig, html, data) {
-	if (game.settings.get(settingsKey, "synchronizedDoors") && data.isDoor) {
+	if (game.settings.get(settingsKey, "synchronizedDoors") && data.data.door) {
 		// Inject settings
 		const synchronizedSettings = `
 			<p class="notes">${game.i18n.localize("smart-doors.ui.synchronizedDoors.description")}</p>
@@ -50,9 +50,9 @@ export async function onWallConfigUpdate(event, formData) {
 		// Search for other doors in the synchronization group that aren't in the list of edited doors
 		const doorInGroup = Util.findInAllWalls(wall => {
 			// We only search for doors
-			if (!wall.data.door) return false;
+			if (!wall.door) return false;
 			// We only want doors in the same synchronization group
-			if (wall.data.flags.smartdoors?.synchronizationGroup !== formData.synchronizationGroup)
+			if (wall.flags.smartdoors?.synchronizationGroup !== formData.synchronizationGroup)
 				return false;
 			// Doors on this scene that have their id included in `ids` are currently being changed. Ignore them.
 			if (wall.parent.id === canvas.scene.id && ids.includes(wall.id)) return false;
@@ -60,11 +60,11 @@ export async function onWallConfigUpdate(event, formData) {
 		});
 		if (doorInGroup) {
 			// ds is the door sate in foundry
-			updateData.ds = doorInGroup.data.ds;
+			updateData.ds = doorInGroup.ds;
 
 			if (synchronizeSecretStatus) {
 				// door is the door type in foundry
-				updateData.door = doorInGroup.data.door;
+				updateData.door = doorInGroup.door;
 			}
 		}
 	}
@@ -84,13 +84,13 @@ export async function onWallConfigUpdate(event, formData) {
 
 // Update the state of all synchronized doors
 export function onDoorLeftClick() {
-	const state = this.wall.data.ds;
+	const state = this.wall.document.ds;
 	const states = CONST.WALL_DOOR_STATES;
 
 	// Check if this feature is enabled
 	if (!game.settings.get(settingsKey, "synchronizedDoors")) return false;
 
-	const synchronizationGroup = this.wall.data.flags.smartdoors?.synchronizationGroup;
+	const synchronizationGroup = this.wall.document.flags.smartdoors?.synchronizationGroup;
 
 	// Does this door have a synchronization group? If not there is nothing to do
 	if (!synchronizationGroup) return false;
@@ -109,13 +109,13 @@ export function onDoorLeftClick() {
 }
 
 export function onDoorRightClick() {
-	const state = this.wall.data.ds;
+	const state = this.wall.document.ds;
 	const states = CONST.WALL_DOOR_STATES;
 
 	// Check if this feature is enabled
 	if (!game.settings.get(settingsKey, "synchronizedDoors")) return false;
 
-	const synchronizationGroup = this.wall.data.flags.smartdoors?.synchronizationGroup;
+	const synchronizationGroup = this.wall.document.flags.smartdoors?.synchronizationGroup;
 
 	// Does this door have a synchronization group? If not there is nothing to do
 	if (!synchronizationGroup) return false;
@@ -140,8 +140,7 @@ export function onDoorRightClick() {
 export function updateSynchronizedDoors(updateData, synchronizationGroup) {
 	// Search for doors belonging to the synchronization group in all scenes
 	let scenes = Util.filterAllWalls(
-		wall =>
-			wall.data.door && wall.data.flags.smartdoors?.synchronizationGroup === synchronizationGroup,
+		wall => wall.door && wall.flags.smartdoors?.synchronizationGroup === synchronizationGroup,
 	);
 
 	// Update all doors in the synchronization group
