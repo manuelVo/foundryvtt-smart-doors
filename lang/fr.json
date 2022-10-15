@@ -3,19 +3,39 @@
 		"settings": {
 			"doorControlSizeFactor": {
 				"name": "Facteur de taille de commande de porte",
-				"hint": "Définit par quel facteur la taille des icônes de contrôle de porte doit être agrandie"
+				"hint": "Définit par quel facteur la taille des icônes de contrôle de porte doit être mise à l'échelle."
 			},
 			"highlightSecretDoors": {
 				"name": "Teinte des portes secrètes",
-				"indice": "Ombragez les portes secrètes d'une couleur différente sur l'écran gm pour les différencier des portes normales"
+				"indice": "Ombragez les portes secrètes d'une couleur différente sur l'écran gm pour les différencier des portes normales",
+				"hint": "Ombre les portes secrètes en une couleur différent sur l'écran du MJ pour les différencier des portes normales."
 			},
 			"lockedDoorAlert": {
 				"name": "Alerte de porte verrouillée",
-				"hint": "Envoyer un message dans le chat lorsqu'un joueur essaie d'ouvrir une porte verrouillée"
+				"hint": "Envoyer un message dans la conversation lorsqu'un joueur essaie d'ouvrir une porte verrouillée."
 			},
 			"synchronizedDoors": {
 				"name": "Portes synchronisées",
-				"hint": "Synchroniser l'état des portes configurées"
+				"hint": "Synchroniser l'état de plusieurs portes."
+			}
+		},
+		"keybindings": {
+			"toggleSecretDoor": {
+				"name": "Activer porte secrète",
+				"hint": "Lorsque cette clé est maintenue, cliquer sur les portes permettra de passer d'une porte normale à une porte secrète."
+			}
+		},
+		"ui": {
+			"synchronizedDoors": {
+				"description": "Les changements d'état des portes dans le même groupe de synchronisation seront synchronisés à travers les scènes. Laisser vierge pour désactiver la synchronisation pour cette porte.",
+				"groupName": "Groupe de synchronisation",
+				"synchronizeSecretStatus": "Synchroniser le statut 'secret'"
+			},
+			"lockedDoorAlert": "vient d'essayer d'ouvrir une porte verrouillée",
+			"messages": {
+				"migrating": "Migre Smart doors à la version {version}. Ne pas fermer l'application.",
+				"migrationDone": "Smart doors a migré avec succès à la version {version}.",
+				"unknownVersion": "La migration de Smart doors est un échec avec l'erreur : version inconnue {version}. SVP, signalez cela dans le traqueur de problème de Smart doors. Pour prévenir de potentielles pertes de donnés, n'utilisez plus le plugin jusqu'à ce que cette erreur soit réparée."
 			}
 		}
 	},
