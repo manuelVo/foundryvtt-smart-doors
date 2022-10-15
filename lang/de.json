@@ -1,41 +1,41 @@
 {
 	"smart-doors": {
-	  "keybindings": {
-		  "toggleSecretDoor": {
-			  "name": "Geheimtüren umschalten",
-			  "hint": "Solange diese Taste gedrückt ist, werden Türen beim Klicken zwischen normaler Tür und Geheimtür umgeschalten."
-		  }
-	  },
-	  "settings": {
-		  "doorControlSizeFactor": {
-			  "name": "Skalierungsfaktor des Türsymbols",
-			  "hint": "Legt fest um welchen Faktor die Größe der Türsymbole hochskaliert werden sollen"
-		  },
-		  "highlightSecretDoors": {
-			  "name": "Geheimtüren einfärben",
-			  "hint": "Geheimtüren werden beim Spielleiter in einer anderen Farbe dargestellt, um sie einfacher von anderen Türen unterscheiden zu können."
-		  },
-		  "lockedDoorAlert": {
-			  "name": "Alarm bei verschlossenen Türen",
-			  "hint": "Wenn ein Spieler versucht eine verschlossene Tür zu öffnen wird eine Nachricht im Chat angezeigt"
-		  },
-		  "synchronizedDoors": {
-			  "name": "Synchronisierte Türen",
-			  "hint": "Erlaubt es den Zustand mehrerer Türen zu synchronisieren"
-		  }
-	  },
-	  "ui": {
-		  "lockedDoorAlert": "Hat versucht eine verschlossene Tür zu öffnen",
-		  "messages": {
-			  "migrating": "Aktualisiere Smart Doors zur Version {version}. Bitte schließe die Anwendung nicht!",
-			  "migrationDone": "Smart Doors wurde erfolgreich auf die Version {version} aktualisiert.",
-			  "unknownVersion": "Die Aktualisierung von Smart Doors ist mit folgendem Fehler fehlgeschlagen: Unbekannte Version {version}. Bite melde diesen Fehler im Bugtracker von Smart Doors. Um Datenverlust zu vermeiden, deaktiviere dieses Modul, bis dieser Fehler behoben ist."
-		  },
-		  "synchronizedDoors": {
-			  "description": "Zustandsänderungen von Türen in der gleichen Synchronisationsgruppe werden szenenübergreifend synchronisiert. Lasse dieses Feld leer, wenn du diese Tür nicht synchronisieren möchtest.",
-			  "groupName": "Synchronisationsgruppe",
-			  "synchronizeSecretStatus": "Geheimtürstatus synchronisieren"
-		  }
-	  }
-  }
+		"keybindings": {
+			"toggleSecretDoor": {
+				"name": "Geheimtüren umschalten",
+				"hint": "Solange diese Taste gedrückt ist, werden Türen beim Klicken zwischen normaler Tür und Geheimtür umgeschaltet."
+			}
+		},
+		"settings": {
+			"doorControlSizeFactor": {
+				"name": "Skalierungsfaktor des Türsymbols",
+				"hint": "Legt fest um welchen Faktor die Größe der Türsymbole hochskaliert werden sollen."
+			},
+			"highlightSecretDoors": {
+				"name": "Geheimtüren einfärben",
+				"hint": "Geheimtüren werden beim Spielleiter in einer anderen Farbe dargestellt, um sie einfacher von anderen Türen unterscheiden zu können."
+			},
+			"lockedDoorAlert": {
+				"name": "Alarm bei verschlossenen Türen",
+				"hint": "Wenn ein Spieler versucht eine verschlossene Tür zu öffnen, wird eine Nachricht im Chat angezeigt."
+			},
+			"synchronizedDoors": {
+				"name": "Synchronisierte Türen",
+				"hint": "Erlaubt es den Zustand mehrerer Türen zu synchronisieren."
+			}
+		},
+		"ui": {
+			"lockedDoorAlert": "Hat versucht eine verschlossene Tür zu öffnen",
+			"messages": {
+				"migrating": "Aktualisiere Smart Doors zur Version {version}. Bitte schließe die Anwendung nicht.",
+				"migrationDone": "Smart Doors wurde erfolgreich auf die Version {version} aktualisiert.",
+				"unknownVersion": "Die Aktualisierung von Smart Doors ist mit folgendem Fehler fehlgeschlagen: unbekannte Version {version}. Bitte melde diesen Fehler im Bugtracker von Smart Doors. Um Datenverlust zu vermeiden, deaktiviere dieses Modul, bis dieser Fehler behoben ist."
+			},
+			"synchronizedDoors": {
+				"description": "Zustandsänderungen von Türen in der gleichen Synchronisationsgruppe werden szenenübergreifend synchronisiert. Lasse dieses Feld leer, wenn du diese Tür nicht synchronisieren möchtest.",
+				"groupName": "Synchronisationsgruppe",
+				"synchronizeSecretStatus": "Geheimtürstatus synchronisieren"
+			}
+		}
+	}
 }
