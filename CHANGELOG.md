@@ -1,3 +1,13 @@
+## 1.4.0
+### Compatibility
+- Smart Doors is now compatible with Foundry v10
+
+### Translation
+- Updated the english text for several UI items
+- Updated the german translation (thanks Athemis!)
+- Updated the french translation (thanks rectulo!)
+
+
 ## 1.3.3
 ### Bugfixes
 - Fixed a bug that could cause some settings to not apply if multiple settings were changed at once
