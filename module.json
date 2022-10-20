@@ -41,11 +41,6 @@
 		},
 		{
 			"lang": "pt-BR",
-			"name": "Português",
-			"path": "lang/pt_BR.json"
-		},
-		{
-			"lang": "pt-BR",
 			"name": "Português (Brasil)",
 			"path": "lang/pt-BR.json"
 		}
