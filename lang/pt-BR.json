@@ -1,0 +1,41 @@
+{
+	"smart-doors": {
+		"keybindings": {
+			"toggleSecretDoor": {
+				"name": "Alternar porta secreta",
+				"hint": "Enquanto esta tecla estiver sendo pressionada, clicar nas portas fará com que ela alterne entre a porta normal e a secreta."
+			}
+		},
+		"settings": {
+			"doorControlSizeFactor": {
+				"name": "Fator de tamanho de controle de porta",
+				"hint": "Define por qual fator o tamanho dos ícones de controle de porta deve ser ampliado."
+			},
+			"highlightSecretDoors": {
+				"name": "Tinta portas secretas",
+				"hint": "Sombreie as portas secretas com uma cor diferente na tela do GM para diferenciá-las das portas normais."
+			},
+			"lockedDoorAlert": {
+				"name": "Alerta de porta trancada",
+				"hint": "Envie uma mensagem no chat quando um jogador tentar abrir uma porta trancada."
+			},
+			"synchronizedDoors": {
+				"name": "Portas sincronizadas",
+				"hint": "Sincronize o estado de várias portas."
+			}
+		},
+		"ui": {
+			"lockedDoorAlert": "Apenas tentei abrir uma porta trancada",
+			"messages": {
+				"migrating": "Migrando Smart Doors para a versão {version}. Por favor, não feche o aplicativo.",
+				"migrationDone": "O Smart Doors migrou com sucesso para a versão {version}.",
+				"unknownVersion": "A migração do Smart Doors falhou com o erro: Unknown Version {version}. Informe isso ao rastreador de problemas do Smart Doors. Para evitar uma possível perda de dados, não use este plugin até que este erro seja corrigido."
+			},
+			"synchronizedDoors": {
+				"description": "As mudanças de estado das portas no mesmo grupo de sincronização serão sincronizadas nas cenas. Deixe em branco para desabilitar a sincronização para esta porta.",
+				"groupName": "Grupo de Sincronização",
+				"synchronizeSecretStatus": "Sincronizar status secreto"
+			}
+		}
+	}
+}
