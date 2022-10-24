@@ -1,3 +1,8 @@
+## 1.4.1
+### Translation
+- Added portugese (Brazil) translation (thanks eunaumtenhoid!)
+
+
 ## 1.4.0
 ### Compatibility
 - Smart Doors is now compatible with Foundry v10
